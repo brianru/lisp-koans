@@ -31,8 +31,8 @@
       (if (> one-prime biggest-in-list)
           (setf biggest-in-list one-prime))
       (incf how-many-in-list))
-    (assert-equal ___ how-many-in-list)
-    (assert-equal ___ biggest-in-list))
+    (assert-equal 4 how-many-in-list)
+    (assert-equal 999565999 biggest-in-list))
   (let ((sum 0))
     "write your own do-list here to calculate the sum of some-primes"
     "you may be interested in investigating the 'incf' function"
