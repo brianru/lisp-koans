@@ -31,6 +31,7 @@
 
 (defmethod roll (how-many (object dice-set))
   ;; WRITE ROLL METHOD DEFINITION HERE
+  ;; (1+ (random 6))
 )
 
 

@@ -65,6 +65,7 @@
                         (* (mod cnt 3) 50)))
           (t            (* (* (truncate cnt 3) 100) num))))
 
+(defvar counted-dice)
 (defun score (dice)
   (if (null dice) (return-from score 0))
   (setq counted-dice (count-dice dice))
