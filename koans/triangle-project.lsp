@@ -17,8 +17,30 @@
 
 (define-condition triangle-error  (error) ())
 
+(defun bad-tri (a b c) (not (and
+                              (> (+ a b) c)
+                              (> (+ a c) b)
+                              (> (+ b c) a))))
+
+(defun isosc (a b c) (or
+                       (= a b)
+                       (= a c)
+                       (= b c)))
+
+(defun equilateral (a b c) (and
+                             (= a b)
+                             (= b c)))
+
 (defun triangle (a b c)
-  :write-me)
+ ; :equilateral if a==b==c
+ ; :isosceles if 2 of a, b, c are equal
+ ; :scalene if a != b != c != a etc
+ ; 'triangle-error if sum of any 2 sides is not greater than the third side
+   (cond ((bad-tri a b c) 'triangle-error)
+         ((equilateral a b c) :equilateral)
+         ((isosc a b c) :isosceles)
+         (t :scalene))
+ )
 
 
 (define-test test-equilateral-triangles-have-equal-sides

@@ -48,10 +48,30 @@
 ; More scoring examples are given in the tests below:
 ;
 ; Your goal is to write the score method.
+(defun count-dice (dice)
+    (loop for die in dice
+          counting (= 1 die) into ones
+          counting (= 2 die) into twos
+          counting (= 3 die) into threes
+          counting (= 4 die) into fours
+          counting (= 5 die) into fives
+          counting (= 6 die) into sixes
+          finally (return (list ones twos threes fours fives sixes))))
+
+(defun score-count (num cnt)
+    (cond ((= num 1) (+ (* (truncate cnt 3) 1000) 
+                        (* (mod cnt 3) 100)))
+          ((= num 5) (+ (* (* (truncate cnt 3) 100) num) 
+                        (* (mod cnt 3) 50)))
+          (t            (* (* (truncate cnt 3) 100) num))))
 
 (defun score (dice)
-  ; You need to write this method
-)
+  (if (null dice) (return-from score 0))
+  (setq counted-dice (count-dice dice))
+  (loop for num from 1 to 6
+        for cnt in counted-dice
+        sum (score-count num cnt)))
+
 
 (define-test test-score-of-an-empty-list-is-zero
     (assert-equal 0 (score nil)))
